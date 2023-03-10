@@ -1,0 +1,28 @@
+@mixin flex(
+  $display,
+  $justify-content,
+  $align-items,
+  $flex-direction,
+  $gap,
+  $flex-wrap
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction;
+  gap: $gap;
+  flex-wrap: $flex-wrap;
+}
+
+li {
+  list-style: none;
+}
+
+//colors
+$textColor: #191919;
+$bluish: #395b64;
+$lightBlue: #a5c9ca;
+$backgroundColor: #e7f6f2;
+$navColor: #191a19;
+$textLight: #eeeeee;
+$hover: #fa7d09;

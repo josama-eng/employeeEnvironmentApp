@@ -19,8 +19,8 @@ POST http://localhost:3001/task
 Content-Type: application/json
 
 {
-    "title":"UI Designer for Homepage",
-    "description":"Understand our brand: Familiarize yourself with our brand guidelines and values to ensure that your design is consistent with our overall identity.Define user needs: Consider the needs and preferences of our target audience when designing the interface.Plan the layout: Sketch out potential layout designs that incorporate key content elements and align with our brand messaging.Choose a color scheme: Select a color palette that complements our brand identity and creates a visually cohesive experience.Design interactive elements: Incorporate interactive elements that engage users and enhance the user experience, such as animations or hover effects.Revise and refine: Collaborate with our team to revise and refine your design until it meets our expectations and achieves our objectives.",
+    "title":"test",
+    "description":"test",
     "assignee":"640b0782412a36083c4183dc",
     "isFinished":"true",
     "dueDate": "2023-02-23T12:00:00Z"

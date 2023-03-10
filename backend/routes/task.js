@@ -13,4 +13,7 @@ router.get("/task/all", taskController.getTasks);
 //delete task
 router.delete("/task/:id", taskController.deleteTask);
 
+//get one task
+router.get("/task/:id", taskController.getTask);
+
 module.exports = router;

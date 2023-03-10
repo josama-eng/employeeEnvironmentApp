@@ -16,7 +16,9 @@ async function addTask(req, res) {
 
 async function getTasks(req, res) {
   try {
-    const allEmployees = await Task.find({});
+    const allEmployees = await Task.find({})
+      .populate("assignee", "fullName")
+      .exec();
     return res.status(220).send(allEmployees);
   } catch (error) {
     return res.status(440).send(error);
@@ -40,8 +42,26 @@ async function deleteTask(req, res) {
   }
 }
 
+//get one task
+async function getTask(req, res) {
+  try {
+    const { id } = req.params;
+    const taskDetails = await Task.find({ _id: id })
+      .populate("assignee", "fullName")
+      .exec();
+    if (taskDetails) {
+      return res.status(200).send(taskDetails);
+    } else {
+      return res.status(415).send("Something went wrong");
+    }
+  } catch (error) {
+    res.status(415).send(error);
+  }
+}
+
 module.exports = {
   addTask,
   getTasks,
   deleteTask,
+  getTask,
 };
