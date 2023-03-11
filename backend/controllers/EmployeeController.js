@@ -99,7 +99,7 @@ async function getAverageSalary(req, res) {
       },
     },
   ])
-    .then((result) => console.log(result))
+    .then((result) => res.status(220).send(result))
     .catch((error) => res.status(415).send(error));
 }
 

@@ -1,11 +1,14 @@
 @import "./setup/theme.scss";
 
 .empolyeeWrapper {
-  width: 50%;
+  width: 100%;
   margin: 20px auto;
   text-align: center;
-  @media screen and (max-width: 850px) {
-    width: 80%;
+  padding: 0 50px;
+  @include flex(flex, space-between, flex-start, column, 30px, wrap);
+  @media screen and (max-width: 865px) {
+    justify-content: center;
+    align-items: center;
   }
   .addEmployee {
     background: $hover;
@@ -17,56 +20,88 @@
       background: $navColor;
     }
   }
-  .employee {
+  .infoContainer {
     width: 100%;
-    background: $navColor;
-    color: $textLight;
-    margin: 20px 0;
-    padding: 20px 0;
-    border-radius: 5px;
-
-    .employeeLink {
+    @include flex(flex, space-between, flex-start, row, 30px, wrap);
+    @media screen and (max-width: 865px) {
+      justify-content: center;
+      // align-items: center;
+    }
+    h2 {
+      background: $navColor;
       color: $textLight;
-      padding: 20px 0;
-      display: inline-block;
-      transition: all 0.5s ease;
-      font-size: 20px;
-      &:hover {
-        color: $hover;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .topEmpoyees {
+      .employeeLink {
+        color: $navColor;
+        padding: 10px 0;
+        display: inline-block;
+        transition: all 0.5s ease;
+        font-size: 20px;
+        &:hover {
+          color: $hover;
+        }
       }
     }
-    .edit {
-      background: $backgroundColor;
-      color: $textColor;
-      padding: 10px 20px;
-      transition: all 0.5s ease;
-      display: inline-block;
+    .employee {
+      width: 100%;
+      background: $navColor;
+      color: $textLight;
       margin: 20px 0;
-      border-radius: 30px;
-      &:hover {
-        background: $hover;
+      padding: 20px;
+      border-radius: 5px;
+
+      .employeeLink {
         color: $textLight;
-      }
-    }
-    .actions {
-      @media screen and (max-width: 850px) {
-        @include flex(flex, space-between, center, column, 10px, wrap);
+        padding: 20px 0;
+        display: inline-block;
+        transition: all 0.5s ease;
+        font-size: 20px;
+        &:hover {
+          color: $hover;
+        }
       }
       .edit {
-        display: inline-block;
-        margin: 0 20px;
-      }
-      button {
-        border: none;
-        cursor: pointer;
-        padding: 13px 35px;
-        font-size: 18px;
-        transition: all 0.5s ease;
-        border-radius: 30px;
+        background: $backgroundColor;
         color: $textColor;
+        padding: 10px 20px;
+        transition: all 0.5s ease;
+        display: inline-block;
+        margin: 20px 0;
+        border-radius: 30px;
+        @media screen and (max-width: 350px) {
+          font-size: 15px;
+        }
         &:hover {
           background: $hover;
           color: $textLight;
+        }
+      }
+      .actions {
+        @media screen and (max-width: 850px) {
+          @include flex(flex, space-between, center, column, 10px, wrap);
+        }
+        .edit {
+          display: inline-block;
+          margin: 0 20px;
+        }
+        button {
+          border: none;
+          cursor: pointer;
+          padding: 13px 35px;
+          font-size: 18px;
+          transition: all 0.5s ease;
+          border-radius: 30px;
+          color: $textColor;
+          @media screen and (max-width: 350px) {
+            font-size: 15px;
+          }
+          &:hover {
+            background: $hover;
+            color: $textLight;
+          }
         }
       }
     }
