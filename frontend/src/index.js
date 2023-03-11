@@ -7,6 +7,8 @@ import EmployeesPage from "./pages/EmployeesPage";
 import HomePage from "./pages/HomePage";
 import TaskDetailsPage from "./pages/TaskDetailsPage";
 import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
+import DepartmentPage from "./pages/DepartmentPage";
+import AddEmployee from "./pages/AddEmployee";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: "employee/:id",
         element: <EmployeeDetailsPage />,
+      },
+      {
+        path: "/departments",
+        element: <DepartmentPage />,
+      },
+      {
+        path: "/addEmployee",
+        element: <AddEmployee />,
       },
     ],
   },

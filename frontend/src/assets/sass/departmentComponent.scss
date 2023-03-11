@@ -1,0 +1,32 @@
+@import "./setup/theme.scss";
+
+.departments {
+  width: 50%;
+  margin: 30px auto;
+  text-align: center;
+  .department {
+    width: 100%;
+    background: $navColor;
+    margin: 20px 0;
+    padding: 20px 0;
+    h2,
+    p {
+      color: $textLight;
+      padding: 10px 0;
+    }
+    p {
+      color: $hover;
+      font-size: 20px;
+    }
+    .employeeLink {
+      display: block;
+      color: $textLight;
+      padding: 10px 0;
+      transition: all 0.5s ease;
+      font-size: 20px;
+      &:hover {
+        color: $hover;
+      }
+    }
+  }
+}

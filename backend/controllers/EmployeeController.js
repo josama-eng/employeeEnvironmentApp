@@ -5,33 +5,33 @@ const Task = require("../models/Task");
 //get 5 employees who completed the largest number of tasks in past month
 
 async function getTopEmployees(req, res) {
-  const startOfMonth = dayjs().subtract(1, "month").startOf("month").toDate();
-  const endOfMonth = dayjs().subtract(1, "month").endOf("month").toDate();
+  try {
+    const startOfMonth = dayjs().subtract(1, "month").startOf("month").toDate();
+    const endOfMonth = dayjs().subtract(1, "month").endOf("month").toDate();
 
-  const tasks = await Task.find({
-    dueDate: { $gte: startOfMonth, $lte: endOfMonth },
-  }).exec();
+    const tasks = await Task.find({
+      dueDate: { $gte: startOfMonth, $lte: endOfMonth },
+    }).exec();
 
-  const tasksByEmployee = {};
+    const tasksByEmployee = {};
 
-  tasks.forEach((task) => {
-    const employeeId = task.assignee;
+    tasks.forEach((task) => {
+      const employeeId = task.assignee;
 
-    if (!tasksByEmployee[employeeId]) {
-      tasksByEmployee[employeeId] = 1;
-    } else {
-      tasksByEmployee[employeeId]++;
-    }
-  });
+      if (!tasksByEmployee[employeeId]) {
+        tasksByEmployee[employeeId] = 1;
+      } else {
+        tasksByEmployee[employeeId]++;
+      }
+    });
 
-  const topFiveEmployees = await Employee.find({
-    _id: { $in: Object.keys(tasksByEmployee) },
-  }).limit(5);
-  // .sort((a, b) => tasksByEmployee[b] - tasksByEmployee[a])
-  // .limit(5)
-  // .exec();
-
-  console.log(topFiveEmployees);
+    const topFiveEmployees = await Employee.find({
+      _id: { $in: Object.keys(tasksByEmployee) },
+    }).limit(5);
+    return res.status(200).send(topFiveEmployees);
+  } catch (error) {
+    return res.status(425).send(error);
+  }
 }
 
 //add employee
