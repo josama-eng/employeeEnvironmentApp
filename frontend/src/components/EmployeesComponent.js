@@ -27,7 +27,10 @@ const EmployeesComponent = () => {
             Full Name : {employee.fullName}
           </Link>
           <div className="actions">
-            <Link to={`/employee/edit/${employee._id}`} className="linkReset">
+            <Link
+              to={`/employee/edit/${employee._id}`}
+              className="linkReset edit"
+            >
               Edit employee
             </Link>
             <button>Delete employee</button>
@@ -37,8 +40,8 @@ const EmployeesComponent = () => {
     });
   };
   return (
-    <div>
-      <Link to="/addEmployee" className="linkReset employeeLink">
+    <div className="empolyeeWrapper">
+      <Link to="/addEmployee" className="linkReset addEmployee">
         Add employee
       </Link>
       {renderEmployees()}

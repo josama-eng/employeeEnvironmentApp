@@ -1,0 +1,74 @@
+@import "./setup/theme.scss";
+
+.empolyeeWrapper {
+  width: 50%;
+  margin: 20px auto;
+  text-align: center;
+  @media screen and (max-width: 850px) {
+    width: 80%;
+  }
+  .addEmployee {
+    background: $hover;
+    padding: 10px 20px;
+    color: #fff;
+    transition: all 0.5s ease;
+    border-radius: 20px;
+    &:hover {
+      background: $navColor;
+    }
+  }
+  .employee {
+    width: 100%;
+    background: $navColor;
+    color: $textLight;
+    margin: 20px 0;
+    padding: 20px 0;
+    border-radius: 5px;
+
+    .employeeLink {
+      color: $textLight;
+      padding: 20px 0;
+      display: inline-block;
+      transition: all 0.5s ease;
+      font-size: 20px;
+      &:hover {
+        color: $hover;
+      }
+    }
+    .edit {
+      background: $backgroundColor;
+      color: $textColor;
+      padding: 10px 20px;
+      transition: all 0.5s ease;
+      display: inline-block;
+      margin: 20px 0;
+      border-radius: 30px;
+      &:hover {
+        background: $hover;
+        color: $textLight;
+      }
+    }
+    .actions {
+      @media screen and (max-width: 850px) {
+        @include flex(flex, space-between, center, column, 10px, wrap);
+      }
+      .edit {
+        display: inline-block;
+        margin: 0 20px;
+      }
+      button {
+        border: none;
+        cursor: pointer;
+        padding: 13px 35px;
+        font-size: 18px;
+        transition: all 0.5s ease;
+        border-radius: 30px;
+        color: $textColor;
+        &:hover {
+          background: $hover;
+          color: $textLight;
+        }
+      }
+    }
+  }
+}
