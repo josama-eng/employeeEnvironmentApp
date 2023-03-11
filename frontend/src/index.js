@@ -9,6 +9,7 @@ import TaskDetailsPage from "./pages/TaskDetailsPage";
 import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
 import DepartmentPage from "./pages/DepartmentPage";
 import AddEmployee from "./pages/AddEmployee";
+import EditEmployeePage from "./pages/EditEmployeePage";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/addEmployee",
         element: <AddEmployee />,
+      },
+      {
+        path: "/employee/edit/:id",
+        element: <EditEmployeePage />,
       },
     ],
   },

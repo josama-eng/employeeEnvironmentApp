@@ -1,24 +1,23 @@
-import { useFormik, Formik, Form, Field, FieldArray } from "formik";
-import * as Yup from "yup";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { addEmployee } from "../services/employee.service";
-import { getAllDepartments } from "../services/department.service";
+import { useParams, useNavigate } from "react-router-dom";
+import { getEmployee, updateEmployee } from "../services/employee.service";
 import { getAllTasks } from "../services/tasks.service";
+import { useEffect, useState } from "react";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import { getAllDepartments } from "../services/department.service";
+import * as Yup from "yup";
+import { toast } from "react-toastify";
 import SelectInput from "../components/SelectInput";
 
-const initEmployee = {
-  fullName: "",
-  email: "",
-  phoneNumber: "",
-  dateOfBirth: "",
-  monthlySalary: 0,
-  tasks: [],
-  department: "",
-};
-
-const AddEmployee = () => {
+const EditEmployeePage = () => {
+  const { id } = useParams();
+  const [editEmployee, setEditEmployee] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    monthlySalary: "",
+    tasks: [],
+    department: "",
+  });
   const navigate = useNavigate();
   const [departments, setDepartments] = useState([]);
   const [tasks, setTasks] = useState([]);
@@ -50,25 +49,39 @@ const AddEmployee = () => {
       });
   }, [setTasks]);
 
-  const onAddEmployee = (values) => {
-    addEmployee({
-      ...values,
-    })
-      .then((response) => {})
+  useEffect(() => {
+    id && getEditEmployee();
+  }, [id]);
+
+  const getEditEmployee = () => {
+    getEmployee(id)
+      .then((response) => {
+        console.log(response.data);
+        setEditEmployee(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const onUpdateEmployee = (values) => {
+    updateEmployee({ ...values, id })
+      .then((response) => {
+        console.log(response.data);
+      })
       .catch((error) => {
         toast.error("Something went wrong,please try latter");
         console.log(error);
       });
   };
-
   const renderForm = () => {
     return (
       <Formik
-        initialValues={initEmployee}
-        onSubmit={(values, actions) => {
-          onAddEmployee(values);
+        initialValues={editEmployee}
+        onSubmit={(values) => {
+          onUpdateEmployee(values);
           navigate("/employees");
-          toast.success("Employee added");
+          toast.success("Employee updated");
         }}
         validationSchema={Yup.object({
           fullName: Yup.string().required("Full name is required"),
@@ -90,44 +103,50 @@ const AddEmployee = () => {
         {(props) => (
           <Form onSubmit={props.handleSubmit}>
             <div>
-              <label htmlFor="fullName">Full Name</label>
-              <Field id="fullName" name="fullName" />
+              <label htmlFor="fullName">Name:</label>
+              <Field
+                type="text"
+                id="name"
+                name="fullName"
+                value={editEmployee.fullName}
+              />
               {props.errors.fullName && (
                 <div id="feedback">{props.errors.fullName}</div>
               )}
             </div>
             <div>
-              <label htmlFor="email">Email</label>
-              <Field id="email" type="email" name="email" />
-              {props.errors.email && (
-                <div id="feedback">{props.errors.email}</div>
-              )}
+              <label htmlFor="dateOfBirth">Date of Birth:</label>
+              <Field type="date" id="dateOfBirth" name="dateOfBirth" />
+              <ErrorMessage name="dateOfBirth" />
             </div>
-            ​
             <div>
-              <label htmlFor="phoneNumber">Phone number</label>
-              <Field id="phoneNumber" name="phoneNumber" />
-              {props.errors.phoneNumber && (
-                <div id="feedback">{props.errors.phoneNumber}</div>
-              )}
+              <label htmlFor="email">Email:</label>
+              <Field type="email" id="email" name="email" />
+              <ErrorMessage name="email" />
             </div>
-            ​
             <div>
-              <label htmlFor="dateOfBirth">Date of birth</label>
-              <Field id="dateOfBirth" type="date" name="dateOfBirth" />
-              {props.errors.dateOfBirth && (
-                <div id="feedback">{props.errors.dateOfBirth}</div>
-              )}
+              <label htmlFor="monthlySalary">Salary:</label>
+              <Field type="number" id="monthlySalary" name="monthlySalary" />
+              <ErrorMessage name="salary" />
             </div>
-            ​
             <div>
-              <label htmlFor="monthlySalary">Monthly salary</label>
-              <Field id="monthlySalary" type="number" name="monthlySalary" />
-              {props.errors.monthlySalary && (
-                <div id="feedback">{props.errors.monthlySalary}</div>
+              <label htmlFor="phoneNumber">Phone Number:</label>
+              <Field type="tel" id="phoneNumber" name="phoneNumber" />
+              <ErrorMessage name="phoneNumber" />
+            </div>
+            <div>
+              <label htmlFor="department">Department</label>
+              <div>
+                <Field
+                  component={SelectInput}
+                  options={departments}
+                  name="department"
+                />
+              </div>
+              {props.errors.department && (
+                <div id="feedback">{props.errors.department}</div>
               )}
             </div>
-            ​
             <div>
               <label>Tasks</label>
               <FieldArray name="tasks">
@@ -162,33 +181,18 @@ const AddEmployee = () => {
                 )}
               </FieldArray>
             </div>
-            ​
-            <div>
-              <label htmlFor="department">Department</label>
-              <div>
-                <Field
-                  component={SelectInput}
-                  options={departments}
-                  name="department"
-                />
-              </div>
-              {props.errors.department && (
-                <div id="feedback">{props.errors.department}</div>
-              )}
-            </div>
-            ​<button type="submit">Submit</button>
+            <button type="submit">Submit</button>
           </Form>
         )}
       </Formik>
     );
   };
-
   return (
-    <div className="addEmployee">
-      <h2>Add employee</h2>
+    <div className="editEmployee">
+      <h2>Edit Employee</h2>
       {renderForm()}
     </div>
   );
 };
 
-export default AddEmployee;
+export default EditEmployeePage;

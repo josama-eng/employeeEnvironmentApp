@@ -20,6 +20,7 @@ const HomePageComponent = () => {
   const handleDeleteTask = (id) => {
     deleteTask(id)
       .then((response) => {
+        setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
         toast.success("Successfully delteted");
       })
       .catch((error) => {

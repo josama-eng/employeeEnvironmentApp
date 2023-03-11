@@ -22,4 +22,7 @@ router.get("/employee/:id", employeeController.getOneEmployee);
 //delete employee
 router.delete("/employee/:id", employeeController.deleteEmployee);
 
+//update employee
+router.put("/employee/edit/:id", employeeController.updateEmployee);
+
 module.exports = router;

@@ -4,7 +4,9 @@ import {
   getAllEmployees,
   getTopEmployees,
   getAverageSalary,
+  deleteEmployee,
 } from "../services/employee.service";
+import { toast } from "react-toastify";
 
 const EmployeesComponent = () => {
   const [employee, setEmployee] = useState([]);
@@ -45,6 +47,19 @@ const EmployeesComponent = () => {
       });
   }, [setAverageSalary]);
 
+  const handleDeleteEmployee = (id) => {
+    deleteEmployee(id)
+      .then((response) => {
+        setEmployee((prevEmployee) =>
+          prevEmployee.filter((employee) => employee._id !== id)
+        );
+        toast.success("Successfully delteted");
+      })
+      .catch((error) => {
+        toast.error("Something went wrong");
+      });
+  };
+
   //render all empolyees
   const renderEmployees = () => {
     return employee.map((employee, index) => {
@@ -63,7 +78,9 @@ const EmployeesComponent = () => {
             >
               Edit employee
             </Link>
-            <button>Delete employee</button>
+            <button onClick={() => handleDeleteEmployee(`${employee._id}`)}>
+              Delete employee
+            </button>
           </div>
         </div>
       );
@@ -92,7 +109,7 @@ const EmployeesComponent = () => {
     return averageSalary.map((salary, index) => {
       return (
         <div className="averageSalary" key={index}>
-          <h3>${salary.averageSalary}</h3>
+          <h3>${salary.averageSalary.toFixed(2)}</h3>
         </div>
       );
     });

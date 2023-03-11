@@ -37,11 +37,12 @@ async function getTopEmployees(req, res) {
 //add employee
 async function addEmpoloyee(req, res) {
   try {
+    console.log(req.body);
     const newEmployee = await Employee.create(req.body);
     newEmployee.save();
   } catch (error) {
     console.log(error);
-    return res.status(415).send(error);
+    return res.status(425).send(error);
   }
 }
 
@@ -80,11 +81,31 @@ async function getOneEmployee(req, res) {
 async function deleteEmployee(req, res) {
   try {
     const { id } = req.params;
+    console.log(id);
     Employee.findByIdAndDelete(id)
       .then((result) => res.status(200).send("Employee deleted successfully"))
       .catch((error) => console.log(error));
   } catch (error) {
     res.status(415).send(error);
+  }
+}
+
+//update employee
+
+async function updateEmployee(req, res) {
+  const body = req.body;
+  const employeeId = body.id;
+  try {
+    console.log(req.body);
+    const updatedEmployee = await Employee.findOneAndUpdate(
+      { _id: employeeId },
+      body,
+      { new: true }
+    );
+    res.status(220).send("Successfuly updated");
+  } catch (error) {
+    console.log(error);
+    res.status(422).send(error);
   }
 }
 
@@ -110,4 +131,5 @@ module.exports = {
   getOneEmployee,
   deleteEmployee,
   getTopEmployees,
+  updateEmployee,
 };
