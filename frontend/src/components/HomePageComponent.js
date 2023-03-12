@@ -54,7 +54,17 @@ const HomePageComponent = () => {
       );
     });
   };
-  return <div className="tasks">{renderTasks()}</div>;
+  return (
+    <>
+      <Link to="/addTask" className="linkReset addTask">
+        Add task
+      </Link>
+      <div className="tasks">
+        <h2>Tasks</h2>
+        <div className="taskContainer">{renderTasks()}</div>
+      </div>
+    </>
+  );
 };
 
 export default HomePageComponent;

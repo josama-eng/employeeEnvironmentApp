@@ -1,49 +1,63 @@
 @import "./setup/theme.scss";
 
+.addTask {
+  background: $navColor;
+  color: $textLight;
+  padding: 10px 20px;
+  transition: all 0.5s ease;
+  border-radius: 30px;
+  display: inline-block;
+  margin: 20px;
+  &:hover {
+    background: $hover;
+  }
+}
+
 .tasks {
   width: 100%;
   padding: 30px 50px;
-  @include flex(flex, center, center, row, 10px, wrap);
-  .task {
-    width: 30%;
-    height: 350px;
-    padding: 10px 20px;
-    border: 3px solid black;
-    color: $textLight;
-    background: $navColor;
-    p {
-      margin: 20px 0px;
-      .employeeLink {
-        background: $backgroundColor;
-        color: $textColor;
-        padding: 10px 20px;
-        transition: all 0.5s ease;
-        &:hover {
-          background: $hover;
+  @include flex(flex, center, center, column, 10px, wrap);
+  .taskContainer {
+    @include flex(flex, center, center, row, 10px, wrap);
+    .task {
+      width: 30%;
+      height: 300px;
+      padding: 10px 20px;
+      color: $textLight;
+      background: $navColor;
+      p {
+        margin: 20px 0px;
+        .employeeLink {
+          color: $hover;
+          padding: 10px 0px;
+          transition: all 0.5s ease;
+          &:hover {
+            color: #fff;
+          }
         }
       }
-    }
-    h3 {
-      padding: 10px 0px;
-    }
-    .actions {
-      @include flex(flex, space-between, center, row, 10px, wrap);
-      .taskLink,
-      button {
-        background: $backgroundColor;
-        color: $textColor;
-        padding: 10px 20px;
-        transition: all 0.5s ease;
-        border-radius: 30px;
-        &:hover {
-          background: $hover;
-        }
+      h3 {
+        padding: 10px 0px;
       }
-      button {
-        border: none;
-        cursor: pointer;
-        padding: 13px 35px;
-        font-size: 18px;
+      .actions {
+        @include flex(flex, space-between, center, row, 10px, wrap);
+        .taskLink,
+        button {
+          background: $backgroundColor;
+          color: $textColor;
+          padding: 10px 20px;
+          transition: all 0.5s ease;
+          border-radius: 30px;
+          &:hover {
+            background: $hover;
+          }
+        }
+        button {
+          border: none;
+          cursor: pointer;
+          padding: 13px 35px;
+          font-size: 18px;
+        }
       }
     }
   }

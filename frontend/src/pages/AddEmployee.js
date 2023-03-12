@@ -1,4 +1,4 @@
-import { useFormik, Formik, Form, Field, FieldArray } from "formik";
+import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -103,7 +103,6 @@ const AddEmployee = () => {
                 <div id="feedback">{props.errors.email}</div>
               )}
             </div>
-            ​
             <div>
               <label htmlFor="phoneNumber">Phone number</label>
               <Field id="phoneNumber" name="phoneNumber" />
@@ -111,7 +110,6 @@ const AddEmployee = () => {
                 <div id="feedback">{props.errors.phoneNumber}</div>
               )}
             </div>
-            ​
             <div>
               <label htmlFor="dateOfBirth">Date of birth</label>
               <Field id="dateOfBirth" type="date" name="dateOfBirth" />
@@ -119,7 +117,6 @@ const AddEmployee = () => {
                 <div id="feedback">{props.errors.dateOfBirth}</div>
               )}
             </div>
-            ​
             <div>
               <label htmlFor="monthlySalary">Monthly salary</label>
               <Field id="monthlySalary" type="number" name="monthlySalary" />

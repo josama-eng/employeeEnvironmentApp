@@ -1,7 +1,8 @@
 @import "./setup/theme.scss";
 
 .addEmployee,
-.editEmployee {
+.editEmployee,
+.addTaskWrapper {
   width: 100%;
   @include flex(flex, space-between, center, column, 30px, wrap);
   padding: 0 20px;
@@ -10,7 +11,7 @@
   }
   form {
     width: 50%;
-    padding: 10px 50px;
+    padding: 20px 50px;
     background: $navColor;
     border-radius: 10px;
     @media screen and (max-width: 800px) {
@@ -22,6 +23,9 @@
     }
     div {
       margin: 10px 0;
+      textarea {
+        width: 100% !important;
+      }
       #feedback {
         color: #ee8b8b;
       }

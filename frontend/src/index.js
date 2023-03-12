@@ -10,6 +10,7 @@ import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
 import DepartmentPage from "./pages/DepartmentPage";
 import AddEmployee from "./pages/AddEmployee";
 import EditEmployeePage from "./pages/EditEmployeePage";
+import AddTask from "./pages/AddTask";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/employee/edit/:id",
         element: <EditEmployeePage />,
+      },
+      {
+        path: "/addTask",
+        element: <AddTask />,
       },
     ],
   },
