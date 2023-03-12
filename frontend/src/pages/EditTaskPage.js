@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getTask, updateTask } from "../services/tasks.service";
 import { getAllEmployees } from "../services/employee.service";
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import SelectInput from "../components/SelectInput";
@@ -54,11 +54,8 @@ const EditTaskPage = () => {
 
   const onUpdateTask = (values) => {
     updateTask({ ...values, id })
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then((response) => {})
       .catch((error) => {
-        toast.error("Something went wrong,please try latter");
         console.log(error);
       });
   };

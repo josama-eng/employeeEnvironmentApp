@@ -26,13 +26,16 @@
   }
   .taskContainer {
     width: 100%;
-    @include flex(flex, center, center, row, 10px, wrap);
+    @include flex(flex, center, center, row, 30px, wrap);
     .task {
       width: 30%;
       height: 300px;
       padding: 10px 20px;
       color: $textLight;
       background: $navColor;
+      box-shadow: 10px 10px 5px 0px rgba(103, 95, 95, 0.75);
+      -webkit-box-shadow: 10px 10px 5px 0px rgba(103, 95, 95, 0.75);
+      -moz-box-shadow: 10px 10px 5px 0px rgba(103, 95, 95, 0.75);
       @media screen and (max-width: 1200px) {
         width: 49%;
         height: 350px;

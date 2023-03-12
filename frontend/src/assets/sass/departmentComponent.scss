@@ -12,6 +12,10 @@
     background: $navColor;
     margin: 20px 0;
     padding: 20px 0;
+    box-shadow: 10px 10px 5px 0px rgba(103, 95, 95, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(103, 95, 95, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(103, 95, 95, 0.75);
+    border-radius: 5px;
     h2,
     p {
       color: $textLight;

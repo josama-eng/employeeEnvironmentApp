@@ -62,7 +62,9 @@
       margin: 20px 0;
       padding: 20px;
       border-radius: 5px;
-
+      box-shadow: 10px 10px 5px 0px rgba(103, 95, 95, 0.75);
+      -webkit-box-shadow: 10px 10px 5px 0px rgba(103, 95, 95, 0.75);
+      -moz-box-shadow: 10px 10px 5px 0px rgba(103, 95, 95, 0.75);
       .employeeLink {
         color: $textLight;
         padding: 20px 0;
