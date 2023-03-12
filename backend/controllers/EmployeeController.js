@@ -83,6 +83,8 @@ async function getOneEmployee(req, res) {
   try {
     const { id } = req.params;
     Employee.find({ _id: id })
+      .populate("tasks")
+      .populate("department", "departmentName")
       .then((result) => {
         res.status(200).send(result);
       })
@@ -98,7 +100,11 @@ async function deleteEmployee(req, res) {
     const { id } = req.params;
     console.log(id);
     Employee.findByIdAndDelete(id)
-      .then((result) => res.status(200).send("Employee deleted successfully"))
+      .then((result) => {
+        console.log(id);
+        Department.findByIdAndDelete(id);
+        res.status(200).send("Employee deleted successfully");
+      })
       .catch((error) => console.log(error));
   } catch (error) {
     res.status(415).send(error);

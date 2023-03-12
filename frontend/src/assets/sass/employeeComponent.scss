@@ -117,3 +117,14 @@
     }
   }
 }
+.employeeDetailsWrapper {
+  width: 50%;
+  margin: 20px auto;
+  .employeeDetails {
+    text-align: center;
+    background: $navColor;
+    color: $textLight;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+}
