@@ -60,7 +60,7 @@ const HomePageComponent = () => {
         Add task
       </Link>
       <div className="tasks">
-        <h2>Tasks</h2>
+        <h2 className="heading">Tasks</h2>
         <div className="taskContainer">{renderTasks()}</div>
       </div>
     </>

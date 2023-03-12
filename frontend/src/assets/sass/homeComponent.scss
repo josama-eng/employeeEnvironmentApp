@@ -17,7 +17,15 @@
   width: 100%;
   padding: 30px 50px;
   @include flex(flex, center, center, column, 10px, wrap);
+  .heading {
+    font-size: 45px;
+    color: $hover;
+  }
+  @media screen and (max-width: 500px) {
+    padding: 30px;
+  }
   .taskContainer {
+    width: 100%;
     @include flex(flex, center, center, row, 10px, wrap);
     .task {
       width: 30%;
@@ -25,6 +33,18 @@
       padding: 10px 20px;
       color: $textLight;
       background: $navColor;
+      @media screen and (max-width: 1200px) {
+        width: 49%;
+        height: 350px;
+      }
+      @media screen and (max-width: 660px) {
+        width: 80%;
+        height: 550px;
+      }
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
+
       p {
         margin: 20px 0px;
         .employeeLink {

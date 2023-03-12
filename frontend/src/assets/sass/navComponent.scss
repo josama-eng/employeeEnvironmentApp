@@ -6,13 +6,22 @@ nav {
   background: $navColor;
   position: sticky;
   top: 0;
+  @media screen and (max-width: 530px) {
+    padding: 20px;
+  }
   ul {
-    @include flex(flex, flex-start, center, row, 100px, wrap);
+    @include flex(flex, flex-start, center, row, 50px, wrap);
+    @media screen and (max-width: 360px) {
+      gap: 20px;
+    }
     li {
       .navLinks {
         color: $textLight;
         transition: all 0.5s ease;
         font-size: 22px;
+        @media screen and (max-width: 530px) {
+          font-size: 15px;
+        }
         &:hover {
           color: $hover;
         }
