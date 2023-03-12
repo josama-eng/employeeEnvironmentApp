@@ -1,6 +1,7 @@
 const Employee = require("../models/Employee");
 const dayjs = require("dayjs");
 const Task = require("../models/Task");
+const Department = require("../models/Department");
 
 //get 5 employees who completed the largest number of tasks in past month
 
@@ -39,7 +40,21 @@ async function addEmpoloyee(req, res) {
   try {
     console.log(req.body);
     const newEmployee = await Employee.create(req.body);
-    newEmployee.save();
+    newEmployee
+      .save()
+      .then(() => {
+        Department.findById(req.body.department)
+          .then((department) => {
+            department.employees.push(newEmployee._id);
+            department.save();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   } catch (error) {
     console.log(error);
     return res.status(425).send(error);

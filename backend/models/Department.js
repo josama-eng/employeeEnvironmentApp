@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 const conn = require("../db/connect");
+const ObjectID = mongoose.Schema.Types.ObjectID;
 
 const departmentSchema = new mongoose.Schema(
   {
@@ -11,7 +12,7 @@ const departmentSchema = new mongoose.Schema(
     },
     employees: [
       {
-        type: Schema.Types.ObjectId,
+        type: ObjectID,
         ref: "Employee",
       },
     ],

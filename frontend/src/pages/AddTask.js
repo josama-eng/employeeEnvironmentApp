@@ -15,6 +15,7 @@ const initTask = {
 };
 
 const AddTask = () => {
+  const navigate = useNavigate();
   const [assignee, setAssignee] = useState([]);
   useEffect(() => {
     getAllEmployees()
@@ -45,7 +46,15 @@ const AddTask = () => {
         initialValues={initTask}
         onSubmit={(values) => {
           onAddTask(values);
+          navigate("/");
+          toast.success("Task added successfully");
         }}
+        validationSchema={Yup.object({
+          title: Yup.string().required("Title is required"),
+          description: Yup.string().required("Description is required"),
+          assignee: Yup.string().required("Assignee is required"),
+          dueDate: Yup.date().required("Due date is required"),
+        })}
       >
         {(props) => (
           <Form onSubmit={props.handleSubmit}>

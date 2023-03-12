@@ -3,6 +3,8 @@ const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 const conn = require("../db/connect");
 
+const ObjectID = mongoose.Schema.Types.ObjectID;
+
 const employeeSchema = new mongoose.Schema(
   {
     fullName: {
@@ -28,12 +30,12 @@ const employeeSchema = new mongoose.Schema(
     },
     tasks: [
       {
-        type: Schema.Types.ObjectId,
+        type: ObjectID,
         ref: "Task",
       },
     ],
     department: {
-      type: Schema.Types.ObjectId,
+      type: ObjectID,
       ref: "Department",
       default: null,
     },

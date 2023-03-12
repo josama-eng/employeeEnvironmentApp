@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 const conn = require("../db/connect");
+const ObjectID = mongoose.Schema.Types.ObjectID;
 
 const taskSchema = new mongoose.Schema(
   {
@@ -14,12 +15,8 @@ const taskSchema = new mongoose.Schema(
       required: true,
     },
     assignee: {
-      type: Schema.Types.ObjectId,
+      type: ObjectID,
       ref: "Employee",
-    },
-    isFinished: {
-      type: Boolean,
-      default: false,
     },
     dueDate: {
       type: Date,

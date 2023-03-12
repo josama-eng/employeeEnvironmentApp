@@ -1,11 +1,18 @@
 const Task = require("../models/Task");
+const Employee = require("../models/Employee");
 
 //add task
 
 async function addTask(req, res) {
   try {
+    console.log(req.body);
     const newTask = await Task.create(req.body);
-    newTask.save();
+    newTask.save().then(() => {
+      Employee.findById(req.body.assignee).then((assignee) => {
+        assignee.tasks.push(newTask._id);
+        assignee.save();
+      });
+    });
   } catch (error) {
     console.log(error);
     return res.status(415).send(error);

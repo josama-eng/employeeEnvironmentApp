@@ -17,7 +17,7 @@ const EmployeesComponent = () => {
   useEffect(() => {
     getAllEmployees()
       .then((response) => {
-        setEmployee(response.data);
+        setEmployee([...response.data]);
       })
       .catch((error) => {
         console.log(error);

@@ -2,15 +2,15 @@ POST http://localhost:3001/employee
 Content-Type: application/json
 
 {
-    "fullName":"Teodora Jovanov",
-    "email":"tea@gmail.com",
+    "fullName":"Petar Jovanov",
+    "email":"pera@gmail.com",
     "phoneNumber":"+387657598521",
     "dateOfBirth":"04.12.1995",
     "monthlySalary": 1600,
     "tasks": [
         "640a34c7646004eeabdb9176"
     ],
-    "department": "640b007e3b9aeb526e18bec8"
+    "department": "640b05c7628c9f4d6563f053"
 }
 
 ###
@@ -21,7 +21,7 @@ Content-Type: application/json
 {
     "title":"test",
     "description":"test",
-    "assignee":"640b0782412a36083c4183dc",
+    "assignee":"640daae910767700f0ae1b1f",
     "isFinished":"true",
     "dueDate": "2023-02-23T12:00:00Z"
 }
