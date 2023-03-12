@@ -2,7 +2,8 @@
 
 .addEmployee,
 .editEmployee,
-.addTaskWrapper {
+.addTaskWrapper,
+.editTaskWrapper {
   width: 100%;
   @include flex(flex, space-between, center, column, 30px, wrap);
   padding: 0 20px;

@@ -66,9 +66,24 @@ async function getTask(req, res) {
   }
 }
 
+async function updateTask(req, res) {
+  const body = req.body;
+  const taskId = body.id;
+  try {
+    const updatedTask = await Task.findOneAndUpdate({ _id: taskId }, body, {
+      new: true,
+    });
+    res.status(220).send("Successfuly updated");
+  } catch (error) {
+    console.log(error);
+    res.status(422).send(error);
+  }
+}
+
 module.exports = {
   addTask,
   getTasks,
   deleteTask,
   getTask,
+  updateTask,
 };

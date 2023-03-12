@@ -31,7 +31,7 @@ const TaskDetailsComponent = () => {
             >
               Assignee : {task.assignee?.fullName ?? ""}
             </Link>
-            <Link to={`/edit/${task._id}`} className="linkReset editLink">
+            <Link to={`/edit/task/${task._id}`} className="linkReset editLink">
               Edit task
             </Link>
           </div>
