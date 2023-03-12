@@ -8,16 +8,17 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import SelectInput from "../components/SelectInput";
 
+const initEmployee = {
+  fullName: "",
+  email: "",
+  phoneNumber: "",
+  monthlySalary: "",
+  tasks: [],
+  department: "",
+};
 const EditEmployeePage = () => {
   const { id } = useParams();
-  const [editEmployee, setEditEmployee] = useState({
-    fullName: "",
-    email: "",
-    phoneNumber: "",
-    monthlySalary: "",
-    tasks: [],
-    department: "",
-  });
+  const [editEmployee, setEditEmployee] = useState(null);
   const navigate = useNavigate();
   const [departments, setDepartments] = useState([]);
   const [tasks, setTasks] = useState([]);
@@ -50,14 +51,20 @@ const EditEmployeePage = () => {
   }, [setTasks]);
 
   useEffect(() => {
-    id && getEditEmployee();
+    if (id) {
+      getEditEmployee(id);
+    }
   }, [id]);
 
-  const getEditEmployee = () => {
-    getEmployee(id)
+  const getEditEmployee = (employeeId) => {
+    getEmployee(employeeId)
       .then((response) => {
-        console.log(response.data);
-        setEditEmployee(response.data);
+        const employeeData = response.data[0];
+        const departmentId = employeeData.department._id;
+        employeeData.department = departmentId;
+        const tasksArray = employeeData.tasks.map((task) => task._id);
+        employeeData.tasks = tasksArray;
+        setEditEmployee(employeeData);
       })
       .catch((error) => {
         console.log(error);
@@ -66,9 +73,7 @@ const EditEmployeePage = () => {
 
   const onUpdateEmployee = (values) => {
     updateEmployee({ ...values, id })
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then((response) => {})
       .catch((error) => {
         toast.error("Something went wrong,please try latter");
         console.log(error);
@@ -77,7 +82,7 @@ const EditEmployeePage = () => {
   const renderForm = () => {
     return (
       <Formik
-        initialValues={editEmployee}
+        initialValues={editEmployee || initEmployee}
         onSubmit={(values) => {
           onUpdateEmployee(values);
           navigate("/employees");
@@ -99,17 +104,13 @@ const EditEmployeePage = () => {
           tasks: Yup.array().required("Required"),
           department: Yup.string().required("Department is required"),
         })}
+        enableReinitialize={true}
       >
         {(props) => (
           <Form onSubmit={props.handleSubmit}>
             <div>
               <label htmlFor="fullName">Name:</label>
-              <Field
-                type="text"
-                id="name"
-                name="fullName"
-                value={editEmployee.fullName}
-              />
+              <Field type="text" id="name" name="fullName" />
               {props.errors.fullName && (
                 <div id="feedback">{props.errors.fullName}</div>
               )}
@@ -152,8 +153,8 @@ const EditEmployeePage = () => {
               <FieldArray name="tasks">
                 {({ insert, remove, push }) => (
                   <div>
-                    {props.values.tasks.length > 0 &&
-                      props.values.tasks.map((task, index) => (
+                    {props.values.tasks?.length > 0 &&
+                      props.values.tasks?.map((task, index) => (
                         <div key={index}>
                           <div>
                             <Field

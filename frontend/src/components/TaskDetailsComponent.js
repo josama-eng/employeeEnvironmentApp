@@ -9,7 +9,6 @@ const TaskDetailsComponent = () => {
   useEffect(() => {
     getTask(id)
       .then((response) => {
-        console.log(response.data);
         setTaskDetails(response.data);
       })
       .catch((error) => {

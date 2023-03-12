@@ -9,7 +9,6 @@ const EmployeeDetailsComponent = () => {
   useEffect(() => {
     getEmployee(id)
       .then((response) => {
-        console.log(response.data);
         setEmployeeDetails(response.data);
       })
       .catch((error) => {
@@ -28,8 +27,8 @@ const EmployeeDetailsComponent = () => {
           <h3>Department: {employee.department?.departmentName}</h3>
           <div className="tasks">
             <h3>Tasks:</h3>
-            {employee.tasks?.map((task) => {
-              return <p>{task.title}</p>;
+            {employee.tasks?.map((task, index) => {
+              return <p key={index}>{task.title}</p>;
             })}
           </div>
         </div>

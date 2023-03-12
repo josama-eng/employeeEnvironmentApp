@@ -7,10 +7,10 @@ const employeeRouter = require("./routes/employee");
 const taskRouter = require("./routes/task");
 const departmentRouter = require("./routes/department");
 
-//middleware
 const app = express();
 const port = process.env.PORT;
 
+//middleware
 app.use(cors());
 app.use(express.json());
 

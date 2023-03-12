@@ -17,7 +17,7 @@ const EmployeesComponent = () => {
   useEffect(() => {
     getAllEmployees()
       .then((response) => {
-        setEmployee([...response.data]);
+        setEmployee(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -39,7 +39,6 @@ const EmployeesComponent = () => {
   useEffect(() => {
     getAverageSalary()
       .then((response) => {
-        console.log(response.data);
         setAverageSalary(response.data);
       })
       .catch((error) => {

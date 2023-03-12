@@ -38,7 +38,6 @@ async function getTopEmployees(req, res) {
 //add employee
 async function addEmpoloyee(req, res) {
   try {
-    console.log(req.body);
     const newEmployee = await Employee.create(req.body);
     newEmployee
       .save()
@@ -56,7 +55,6 @@ async function addEmpoloyee(req, res) {
         console.log(error);
       });
   } catch (error) {
-    console.log(error);
     return res.status(425).send(error);
   }
 }
@@ -98,10 +96,8 @@ async function getOneEmployee(req, res) {
 async function deleteEmployee(req, res) {
   try {
     const { id } = req.params;
-    console.log(id);
     Employee.findByIdAndDelete(id)
       .then((result) => {
-        console.log(id);
         Department.findByIdAndDelete(id);
         res.status(200).send("Employee deleted successfully");
       })
@@ -122,7 +118,20 @@ async function updateEmployee(req, res) {
       { _id: employeeId },
       body,
       { new: true }
-    );
+    )
+      .then(() => {
+        Task.updateMany(
+          { assignee: employeeId },
+          { $set: { assignee: employeeId } }
+        );
+        Department.updateOne(
+          { _id: body.department },
+          { $addToSet: { assignee: updatedEmployee._id } }
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     res.status(220).send("Successfuly updated");
   } catch (error) {
     console.log(error);

@@ -7,16 +7,19 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import SelectInput from "../components/SelectInput";
 
+const initTask = {
+  title: "",
+  description: "",
+  assignee: "",
+  dueDate: "",
+};
+
 const EditTaskPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
-  const [editTask, setEditTask] = useState({
-    title: "",
-    description: "",
-    assignee: "",
-    dueDate: "",
-  });
+  const [editTask, setEditTask] = useState(null);
+
   useEffect(() => {
     getAllEmployees()
       .then((response) => {
@@ -39,8 +42,10 @@ const EditTaskPage = () => {
   const getEditTask = () => {
     getTask(id)
       .then((response) => {
-        console.log(response.data);
-        setEditTask(response.data);
+        const taskData = response.data[0];
+        const assigneeId = taskData.assignee._id;
+        taskData.assignee = assigneeId;
+        setEditTask(taskData);
       })
       .catch((error) => {
         console.log(error);
@@ -60,9 +65,11 @@ const EditTaskPage = () => {
   const renderForm = () => {
     return (
       <Formik
-        initialValues={editTask}
+        initialValues={editTask || initTask}
         onSubmit={(values) => {
           onUpdateTask(values);
+          navigate("/");
+          toast.success("Task updated");
         }}
         validationSchema={Yup.object({
           title: Yup.string().required("Title is required"),

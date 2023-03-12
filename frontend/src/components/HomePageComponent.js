@@ -9,7 +9,6 @@ const HomePageComponent = () => {
   useEffect(() => {
     getAllTasks(tasks)
       .then((response) => {
-        console.log(response.data);
         setTasks(response.data);
       })
       .catch((error) => {
@@ -41,7 +40,6 @@ const HomePageComponent = () => {
               Assignee : {task.assignee?.fullName ?? ""}
             </Link>
           </p>
-          {/* <h3>Due Date: {formatDate(task.dueDate)}</h3> */}
           <div className="actions">
             <Link to={`/task/${task._id}`} className="linkReset taskLink">
               See details
